@@ -1,13 +1,8 @@
 package data
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"regexp"
 	"time"
-
-	"github.com/go-playground/validator"
 )
 
 //Product defines the structure for an API product
@@ -22,37 +17,8 @@ type Product struct {
 	DeletedOn   string  `json:"-"`
 }
 
-//validator
-func (p *Product) Validate() error {
-	validate := validator.New()
-	validate.RegisterValidation("sku", validateSKU)
-	return validate.Struct(p)
-}
-
-func validateSKU(fl validator.FieldLevel) bool {
-	re := regexp.MustCompile(`[a-z]+-[a-z]+-[a-z]+`)
-	matches := re.FindAllString(fl.Field().String(), -1)
-
-	if len(matches) != 1 {
-		return false
-	}
-	return true
-}
-
 //Products is a collection of Product
 type Products []*Product
-
-//makes the product object into a JSON
-func (p *Product) FromJSON(r io.Reader) error {
-	e := json.NewDecoder(r)
-	return e.Decode(p)
-}
-
-//makes the product object into a JSON
-func (p *Products) ToJSON(w io.Writer) error {
-	e := json.NewEncoder(w)
-	return e.Encode(p)
-}
 
 //returns a list of products
 func GetProducts() Products {
@@ -71,6 +37,12 @@ func UpdateProduct(id int, p *Product) error {
 	}
 	p.ID = id
 	productList[pos] = p
+	return nil
+}
+
+func DeleteProduct(id int) error {
+	_, i, _ := findProduct(id)
+	productList = append(productList[:i], productList[i+1])
 	return nil
 }
 
@@ -97,7 +69,7 @@ var productList = []*Product{
 		Name:        "Latte",
 		Description: "Frothy Mily Coffee",
 		Price:       2.45,
-		SKU:         "abc323",
+		SKU:         "fda-gfd-amo",
 		CreatedOn:   time.Now().UTC().String(),
 		UpdatedOn:   time.Now().UTC().String(),
 	},
@@ -106,7 +78,7 @@ var productList = []*Product{
 		Name:        "Espresso",
 		Description: "Short and strong coffee without milk",
 		Price:       1.99,
-		SKU:         "fjd134",
+		SKU:         "vwr-ako-dde",
 		CreatedOn:   time.Now().UTC().String(),
 		UpdatedOn:   time.Now().UTC().String(),
 	},

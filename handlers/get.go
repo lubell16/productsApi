@@ -6,10 +6,16 @@ import (
 	"github.com/lubell16/working/data"
 )
 
+//  swagger:route GET /products ListProducts
+//  Returns a list of products
+//  responses:
+//  200: productsResponse
+
+//  GetProducts returns the products from the data store
 func (p *Products) GetProducts(rw http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle GET Products")
 
-	//fetch products from the datastore
+	// fetch products from the datastore
 	lp := data.GetProducts()
 
 	//serialize the list to JSON

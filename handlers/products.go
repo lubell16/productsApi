@@ -23,6 +23,14 @@ import (
 	"github.com/lubell16/working/data"
 )
 
+//  A list of products returns in response
+//  swagger:response productsResponse
+type productsResponse struct {
+	// All products in the system
+	// in: body
+	Body []data.Product
+}
+
 type Products struct {
 	l *log.Logger
 }
