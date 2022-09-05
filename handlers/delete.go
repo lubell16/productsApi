@@ -8,6 +8,12 @@ import (
 	"github.com/lubell16/working/data"
 )
 
+// swagger:route DELETE /products/{id} products deleteProduct
+// Deletes a product from the list
+// responses:
+// 201: productNoContent
+
+//  DeleteProducts Deletes a product from the database
 func (p *Products) DeleteProducts(rw http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)
@@ -24,10 +30,13 @@ func (p *Products) DeleteProducts(rw http.ResponseWriter, r *http.Request) {
 
 	if err == data.ErrProductNotFound {
 		http.Error(rw, "Product not found", http.StatusNotFound)
+		rw.WriteHeader(http.StatusNotFound)
+
 		return
 	}
 	if err != nil {
-		http.Error(rw, "Product not found", http.StatusInternalServerError)
+		p.l.Println("[ERROR] deleting record", err)
+		rw.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 }

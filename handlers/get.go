@@ -6,7 +6,7 @@ import (
 	"github.com/lubell16/working/data"
 )
 
-//  swagger:route GET /products ListProducts
+//  swagger:route GET /products products ListProducts
 //  Returns a list of products
 //  responses:
 //  200: productsResponse
