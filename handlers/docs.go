@@ -18,7 +18,7 @@ import "github.com/lubell16/working/data"
 
 //  A list of products returns in response
 //  swagger:response productsResponse
-type productsResponse struct {
+type productsResponseWrapper struct {
 	//  All products in the system
 	//  in: body
 	Body []data.Product
@@ -32,10 +32,9 @@ type productResponseWrapper struct {
 	Body data.Product
 }
 
-//  swagger:response noContentResponse
-
-type productNoContent struct {
-	//
+// No content is returned by this API endpoint
+// swagger:response noContentResponse
+type noContentResponseWrapper struct {
 }
 
 // swagger:parameters deleteProduct

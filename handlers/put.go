@@ -13,8 +13,6 @@ import (
 //
 // responses:
 //	201: noContentResponse
-//  404: errorResponse
-//  422: errorValidation
 
 func (p *Products) UpdateProduct(rw http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
