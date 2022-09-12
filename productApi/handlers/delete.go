@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/lubell16/working/data"
+	"github.com/lubell16/working/productApi/data"
 )
 
 // swagger:route DELETE /products/{id} products deleteProduct

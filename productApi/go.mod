@@ -1,4 +1,4 @@
-module github.com/lubell16/working
+module github.com/lubell16/working/productApi
 
 go 1.18
 
@@ -6,7 +6,10 @@ require (
 	github.com/go-openapi/runtime v0.19.11
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/gorilla/mux v1.7.3
+	github.com/lubell16/working v0.0.0-20220906211939-e576304a84b5
 )
+
+require github.com/felixge/httpsnoop v1.0.1 // indirect
 
 require (
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
@@ -24,6 +27,7 @@ require (
 	github.com/go-playground/locales v0.13.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
+	github.com/gorilla/handlers v1.5.1
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e // indirect
 	github.com/mitchellh/mapstructure v1.1.2 // indirect
