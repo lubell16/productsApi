@@ -5,15 +5,11 @@ import axios from 'axios';
 class CoffeeList extends React.Component {
 
     readData() {
-
         const self = this;
         const instance = axios.create({
             baseURL: 'http://20.115.0.107:9090'
     });
-        console.log('20.115.0.107:9090/products')
-
-
-        instance.get('/products').then(function(response) {
+    instance.get('/products').then(function(response) {
             console.log(response.data);
 
             self.setState({products: response.data});
