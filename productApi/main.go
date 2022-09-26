@@ -9,7 +9,7 @@ import (
 	"time"
 
 	gohandlers "github.com/gorilla/handlers"
-	"github.com/lubell16/working/currency/protos"
+	"github.com/lubell16/productsApi/currency/protos"
 	"google.golang.org/grpc"
 
 	"github.com/go-openapi/runtime/middleware"

@@ -1,4 +1,4 @@
-module github.com/lubell16/working/productApi
+module github.com/lubell16/productsApi/productApi
 
 go 1.18
 
@@ -6,7 +6,7 @@ require (
 	github.com/go-openapi/runtime v0.19.11
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/gorilla/mux v1.7.3
-	github.com/lubell16/working v0.0.0-20220906211939-e576304a84b5
+	github.com/lubell16/productsApi v0.0.0-20220906211939-e576304a84b5
 )
 
 require (

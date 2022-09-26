@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/lubell16/working/productApi/data"
+	"github.com/lubell16/productsApi/productApi/data"
 )
 
 // MiddlewareValidateProduct validates the product in the request and calls next if ok

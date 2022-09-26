@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/lubell16/working/productApi/data"
+	"github.com/lubell16/productsApi/productApi/data"
 )
 
 //  swagger:route GET /products products ListProducts

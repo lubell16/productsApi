@@ -15,7 +15,7 @@
 package handlers
 
 import (
-	"github.com/lubell16/working/productApi/data"
+	"github.com/lubell16/productsApi/productApi/data"
 )
 
 //  A list of products returns in response

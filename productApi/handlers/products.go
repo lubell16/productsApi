@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/lubell16/working/currency/protos"
+	"github.com/lubell16/productsApi/currency/protos"
 )
 
 type Products struct {
