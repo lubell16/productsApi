@@ -1,9 +1,11 @@
 package handlers
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/lubell16/productsApi/productApi/data"
+	"github.com/lubell16/working/currency/protos"
 )
 
 //  swagger:route GET /products products ListProducts
@@ -14,13 +16,13 @@ import (
 //  GetProducts returns the products from the data store
 func (p *Products) ListAll(rw http.ResponseWriter, r *http.Request) {
 
-	p.l.Println("Handle GET Products")
-
+	p.l.Println("[DEBUG] get all records")
+	rw.Header().Add("Content-Type", "application/json")
 	// fetch products from the datastore
 	lp := data.GetProducts()
 
 	//serialize the list to JSON
-	err := lp.ToJSON(rw)
+	err := data.ToJSON(lp, rw)
 	if err != nil {
 		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
 
@@ -53,6 +55,21 @@ func (p *Products) ListSingle(rw http.ResponseWriter, r *http.Request) {
 		data.ToJSON(&GenericError{Message: err.Error()}, rw)
 		return
 	}
+
+	// get exchange rate
+	rr := protos.RateRequest{
+		Base:        protos.Currencies(protos.Currencies_value["EUR"]),
+		Destination: protos.Currencies(protos.Currencies_value["GBP"]),
+	}
+	resp, err := p.cc.GetRate(context.Background(), rr)
+	if err != nil {
+		p.l.Println("[Error] error getting new rate", err)
+		data.ToJSON(&GenericError{Message: err.Error()}, rw)
+		return
+	}
+
+	p.l.Printf("Resp %#v", resp)
+	prod.Price = prod.Price * resp.Rate
 
 	err = data.ToJSON(prod, rw)
 	if err != nil {

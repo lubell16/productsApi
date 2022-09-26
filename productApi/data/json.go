@@ -12,7 +12,7 @@ func (p *Product) FromJSON(r io.Reader) error {
 }
 
 //makes the product object into a JSON
-func (p *Products) ToJSON(w io.Writer) error {
+func ToJSON(i interface{}, w io.Writer) error {
 	e := json.NewEncoder(w)
-	return e.Encode(p)
+	return e.Encode(i)
 }

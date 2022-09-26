@@ -52,7 +52,7 @@ func GetProductByID(id int) (*Product, error) {
 	if id == -1 {
 		return nil, ErrProductNotFound
 	}
-	return productList[i], nil
+	return productList[pos], nil
 }
 
 func AddProduct(p *Product) {
