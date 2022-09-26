@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/lubell16/productsApi/currency/protos"
 	"github.com/lubell16/productsApi/productApi/data"
-	"github.com/lubell16/working/currency/protos"
 )
 
 //  swagger:route GET /products products ListProducts
@@ -57,7 +57,7 @@ func (p *Products) ListSingle(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	// get exchange rate
-	rr := protos.RateRequest{
+	rr := &protos.RateRequest{
 		Base:        protos.Currencies(protos.Currencies_value["EUR"]),
 		Destination: protos.Currencies(protos.Currencies_value["GBP"]),
 	}

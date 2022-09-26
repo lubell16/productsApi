@@ -7,7 +7,7 @@ require (
 	github.com/hashicorp/go-hclog v1.3.1
 	google.golang.org/grpc v1.48.0
 )
-replace github.com/lubell16/productsApi/currency => github.com/lubell16/working/currency
+
 require (
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
