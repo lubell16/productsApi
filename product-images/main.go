@@ -11,8 +11,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-hclog"
-	"github.com/lubell16/working/product-images/files"
-	"github.com/lubell16/working/product-images/handlers"
+	"github.com/lubell16/productsApi/product-images/files"
+	"github.com/lubell16/productsApi/product-images/handlers"
 
 	// @ts-ignore
 	"github.com/nicholasjackson/env"

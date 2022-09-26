@@ -1,4 +1,4 @@
-module github.com/lubell16/working/currency
+module github.com/lubell16/productsApi/currency
 
 go 1.18
 
