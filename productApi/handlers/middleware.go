@@ -32,9 +32,11 @@ func (p Products) MiddlewareProductValidation(next http.Handler) http.Handler {
 				http.StatusBadRequest)
 			return
 		}
-
+		// add the product to the context
 		ctx := context.WithValue(r.Context(), KeyProduct{}, prod)
 		req := r.WithContext(ctx)
+
+		// Call thenext handler, which can be another midleware in the chain, or the final handler
 		next.ServeHTTP(rw, req)
 	})
 }

@@ -39,4 +39,5 @@ func (p *Products) DeleteProducts(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	rw.WriteHeader(http.StatusNoContent)
 }

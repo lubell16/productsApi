@@ -9,7 +9,14 @@ require (
 	github.com/lubell16/working v0.0.0-20220906211939-e576304a84b5
 )
 
-require github.com/felixge/httpsnoop v1.0.1 // indirect
+require (
+	github.com/felixge/httpsnoop v1.0.1 // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
+	golang.org/x/sys v0.0.0-20210119212857-b64e53b001e4 // indirect
+	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
+	google.golang.org/grpc v1.49.0 // indirect
+	google.golang.org/protobuf v1.27.1 // indirect
+)
 
 require (
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
@@ -32,8 +39,8 @@ require (
 	github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e // indirect
 	github.com/mitchellh/mapstructure v1.1.2 // indirect
 	go.mongodb.org/mongo-driver v1.1.1 // indirect
-	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297 // indirect
-	golang.org/x/text v0.3.2 // indirect
+	golang.org/x/net v0.0.0-20201021035429-f5854403a974 // indirect
+	golang.org/x/text v0.3.3 // indirect
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/yaml.v2 v2.2.4 // indirect
 )
