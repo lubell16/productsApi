@@ -7,7 +7,11 @@ require (
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/gorilla/mux v1.7.3
 	github.com/lubell16/productsApi v0.0.0-20220906211939-e576304a84b5
+	github.com/lubell16/productsApi/currency v0.0.0-20220906211939-e576304a84b5
 )
+replace github.com/lubell16/productsApi v0.0.0-20220906211939-e576304a84b5 => github.com/lubell16/working v0.0.0-20220906211939-e576304a84b5
+replace github.com/lubell16/productsApi/currency v0.0.0-20220906211939-e576304a84b5 => github.com/lubell16/working/currency v0.0.0-20220906211939-e576304a84b5
+
 
 require (
 	github.com/felixge/httpsnoop v1.0.1 // indirect
