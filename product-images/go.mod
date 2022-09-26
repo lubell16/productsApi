@@ -1,4 +1,4 @@
-module github.com/lubell16/working/product-images
+module github.com/lubell16/productApi/product-images
 
 go 1.18
 
