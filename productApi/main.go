@@ -14,7 +14,7 @@ import (
 
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/gorilla/mux"
-	"github.com/lubell16/working/productApi/handlers"
+	"github.com/lubell16/productsApi/productApi/handlers"
 )
 
 func main() {

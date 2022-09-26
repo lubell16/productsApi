@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 
-	"github.com/lubell16/working/currency/protos"
+	"github.com/lubell16/productsApi/currency/protos"
 
 	"github.com/hashicorp/go-hclog"
 )
