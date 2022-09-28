@@ -19,7 +19,7 @@ func (p *Products) ListAll(rw http.ResponseWriter, r *http.Request) {
 	p.l.Println("[DEBUG] get all records")
 	rw.Header().Add("Content-Type", "application/json")
 	// fetch products from the datastore
-	lp := data.GetProducts()
+	lp, _ := data.GetProducts()
 
 	//serialize the list to JSON
 	err := data.ToJSON(lp, rw)

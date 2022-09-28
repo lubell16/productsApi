@@ -197,7 +197,7 @@ func (m *RateRequest) GetDestination() Currencies {
 // rate which is a floating point number and can be used to convert between the
 // two currencies specified in the request.
 type RateResponse struct {
-	Rate                 float32  `protobuf:"fixed32,1,opt,name=rate,proto3" json:"rate,omitempty"`
+	Rate                 float64  `protobuf:"fixed32,1,opt,name=rate,proto3" json:"rate,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -228,7 +228,7 @@ func (m *RateResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_RateResponse proto.InternalMessageInfo
 
-func (m *RateResponse) GetRate() float32 {
+func (m *RateResponse) GetRate() float64 {
 	if m != nil {
 		return m.Rate
 	}
