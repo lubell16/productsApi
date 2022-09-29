@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/go-hclog"
-	"github.com/lubell16/productsApi/currency/protos"
+	protos "github.com/lubell16/productsApi/currency/protos"
 )
 
 // Product defines the structure for an API product

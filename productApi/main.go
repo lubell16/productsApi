@@ -9,7 +9,7 @@ import (
 
 	gohandlers "github.com/gorilla/handlers"
 	"github.com/hashicorp/go-hclog"
-	"github.com/lubell16/productsApi/currency/protos"
+	protos "github.com/lubell16/productsApi/currency/protos"
 	"google.golang.org/grpc"
 
 	"github.com/go-openapi/runtime/middleware"
