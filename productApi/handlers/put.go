@@ -16,12 +16,12 @@ func (p *Products) UpdateProduct(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Add("Content-Type", "application/json")
 
 	prod := r.Context().Value(KeyProduct{}).(data.Product)
-	p.l.Println("[DEBUG] updating record id", prod.ID)
+	p.l.Debug("[DEBUG] updating record id", prod.ID)
 
-	err := data.UpdateProduct(prod)
+	err := p.productDB.UpdateProduct(prod)
 
 	if err == data.ErrProductNotFound {
-		p.l.Println("[ERROR] product not found", err)
+		p.l.Error("[ERROR] product not found", err)
 
 		rw.WriteHeader(http.StatusNotFound)
 		data.ToJSON(&GenericError{Message: "Product not found in database"}, rw)

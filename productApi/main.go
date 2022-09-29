@@ -2,24 +2,25 @@ package main
 
 import (
 	"context"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 
 	gohandlers "github.com/gorilla/handlers"
+	"github.com/hashicorp/go-hclog"
 	"github.com/lubell16/productsApi/currency/protos"
 	"google.golang.org/grpc"
 
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/gorilla/mux"
+	"github.com/lubell16/productsApi/productApi/data"
 	"github.com/lubell16/productsApi/productApi/handlers"
 )
 
 func main() {
 
-	l := log.New(os.Stdout, "product-api", log.LstdFlags)
+	l := hclog.Default()
 
 	conn, err := grpc.Dial("localhost:9092", grpc.WithInsecure())
 	if err != nil {
@@ -30,15 +31,21 @@ func main() {
 	// creates the client
 	cc := protos.NewCurrencyClient(conn)
 
+	// create products DB
+	db := data.NewProductsDB(cc, l)
+
 	// create the handlers
-	ph := handlers.NewProducts(l, cc)
+	ph := handlers.NewProducts(l, db)
 
 	// creates the mux
 	sm := mux.NewRouter()
 
 	// handlers for api
 	getRouter := sm.Methods(http.MethodGet).Subrouter()
+	getRouter.HandleFunc("/products", ph.ListAll).Queries("currency", "{[A-Z]{3}}")
 	getRouter.HandleFunc("/products", ph.ListAll)
+
+	getRouter.HandleFunc("/products/{id:[0-9]+}", ph.ListSingle).Queries("currency", "{[A-Z]{3}}")
 	getRouter.HandleFunc("/products/{id:[0-9]+}", ph.ListSingle)
 
 	putRouter := sm.Methods(http.MethodPut).Subrouter()
@@ -61,16 +68,18 @@ func main() {
 	s := &http.Server{
 		Addr:         ":9090",
 		Handler:      ch(sm),
+		ErrorLog:     l.StandardLogger(&hclog.StandardLoggerOptions{}),
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  1 * time.Second,
 		WriteTimeout: 1 * time.Second,
 	}
 	go func() {
-		l.Println("Starting server on port 9090")
+		l.Info("Starting server on port 9090")
 
 		err := s.ListenAndServe()
 		if err != nil {
-			l.Fatal(err)
+			l.Error("Error starting server", "error", err)
+			os.Exit(1)
 		}
 	}()
 	sigChan := make(chan os.Signal)
@@ -78,7 +87,7 @@ func main() {
 	signal.Notify(sigChan, os.Kill)
 
 	sig := <-sigChan
-	l.Println("Received terminate, graceful shutdown", sig)
+	l.Info("Received terminate, graceful shutdown", sig)
 
 	tc, _ := context.WithTimeout(context.Background(), 30*time.Second)
 	s.Shutdown(tc)

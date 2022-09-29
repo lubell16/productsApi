@@ -2,21 +2,21 @@ package handlers
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/lubell16/productsApi/currency/protos"
+	"github.com/hashicorp/go-hclog"
+	"github.com/lubell16/productsApi/productApi/data"
 )
 
 type Products struct {
-	l  *log.Logger
-	cc protos.CurrencyClient
+	l         hclog.Logger
+	productDB *data.ProductsDB
 }
 
-func NewProducts(l *log.Logger, cc protos.CurrencyClient) *Products {
-	return &Products{l, cc}
+func NewProducts(l hclog.Logger, pdb *data.ProductsDB) *Products {
+	return &Products{l, pdb}
 }
 
 type KeyProduct struct{}

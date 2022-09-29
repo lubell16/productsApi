@@ -24,19 +24,22 @@ func (p *Products) DeleteProducts(rw http.ResponseWriter, r *http.Request) {
 		http.Error(rw, "UNable to convert ID", http.StatusBadRequest)
 		return
 	}
-	p.l.Println("[DEBUG] deleting record id", id)
+	p.l.Debug("[DEBUG] deleting record id", id)
 
 	err = data.DeleteProduct(id)
 
 	if err == data.ErrProductNotFound {
-		http.Error(rw, "Product not found", http.StatusNotFound)
+		p.l.Error("[Error] deleting record id does not exist")
+
 		rw.WriteHeader(http.StatusNotFound)
+		data.ToJSON(&GenericError{Message: err.Error()}, rw)
 
 		return
 	}
 	if err != nil {
-		p.l.Println("[ERROR] deleting record", err)
+		p.l.Error("[ERROR] deleting record", "Error", err)
 		rw.WriteHeader(http.StatusInternalServerError)
+		data.ToJSON(&GenericError{Message: err.Error()}, rw)
 		return
 	}
 	rw.WriteHeader(http.StatusNoContent)

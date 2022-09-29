@@ -57,10 +57,13 @@ func NewProductsDB(c protos.CurrencyClient, l hclog.Logger) *ProductsDB {
 
 //returns a list of products
 func (p *ProductsDB) GetProducts(currency string) (Products, error) {
+
 	if currency == "" {
 		return productList, nil
 	}
+
 	rate, err := p.getRate(currency)
+	p.log.Info("Made it here")
 	if err != nil {
 		p.log.Error("Unable to get rate", "currency", err)
 		return nil, err
@@ -93,10 +96,10 @@ func (p *ProductsDB) GetProductByID(id int, currency string) (*Product, error) {
 	return &np, nil
 }
 
-func AddProduct(p *Product) {
+func (p *ProductsDB) AddProduct(pr *Product) {
 	maxID := productList[len(productList)-1].ID
-	p.ID = maxID + 1
-	productList = append(productList, p)
+	pr.ID = maxID + 1
+	productList = append(productList, pr)
 }
 
 func (p *ProductsDB) UpdateProduct(pr Product) error {
@@ -129,10 +132,14 @@ func findIndexByProductID(id int) int {
 func (p *ProductsDB) getRate(destination string) (float64, error) {
 	rr := &protos.RateRequest{
 		Base:        protos.Currencies(protos.Currencies_value["EUR"]),
-		Destination: protos.Currencies(protos.Currencies_value["GBP"]),
+		Destination: protos.Currencies(protos.Currencies_value[destination]),
 	}
-	resp, err := p.currency.GetRate(context.Background(), rr)
-	return resp.Rate, err
+
+	pos, err := p.currency.GetRate(context.Background(), rr)
+	if err != nil {
+		p.log.Error("whoops", "error", err)
+	}
+	return pos.Rate, err
 }
 
 var productList = []*Product{
