@@ -32,7 +32,7 @@ func (e *ExchangeRates) GetRate(base, dest string) (float64, error) {
 	return dr / br, nil
 }
 func (e *ExchangeRates) getRates() error {
-	resp, err := http.DefaultClient.Get("https://www.ecb.eu ropa.eu/stats/eurofxref/eurofxref-daily.xml")
+	resp, err := http.DefaultClient.Get("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml")
 	if err != nil {
 		return nil
 	}
@@ -53,7 +53,7 @@ func (e *ExchangeRates) getRates() error {
 		e.rates[c.Currency] = r
 	}
 
-	e.rates["Eur"] = 1
+	e.rates["EUR"] = 1
 	return nil
 }
 
